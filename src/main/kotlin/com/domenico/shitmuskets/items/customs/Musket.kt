@@ -14,32 +14,34 @@ class Musket(properties: Item.Properties) : Item(properties) {
     }
 
     override fun use(level: Level, player: Player, interactionHand: InteractionHand): InteractionResult {
-        val item = player.getItemInHand(interactionHand);
+        val item = player.getItemInHand(interactionHand)
         val loaded = item.getOrDefault(ModDataComponents.LOADED, false)
 
-        if(player.cooldowns.isOnCooldown(item)) {
-            return InteractionResult.FAIL;
+        if (player.cooldowns.isOnCooldown(item)) {
+            return InteractionResult.FAIL
         }
 
-        if(loaded) {
-            shoot(level, player, item);
+        if (loaded) {
+            shoot(level, player, item)
         } else {
-            reload(level, player, item);
+            reload(level, player, item)
         }
-        return InteractionResult.SUCCESS;
+
+        return InteractionResult.SUCCESS
     }
 
     private fun reload(level: Level, player: Player, itemStack: ItemStack) {
-        itemStack.set(ModDataComponents.LOADED, true);
+        if (level.isClientSide) return
+        itemStack.set(ModDataComponents.LOADED, true)
         player.cooldowns.addCooldown(itemStack, COOLDOWN_TIME)
     }
 
     private fun shoot(level: Level, player: Player, itemStack: ItemStack) {
-        if(level.isClientSide) return;
-        val lookAngle = player.lookAngle;
+        if (level.isClientSide) return
         val bullet = Projectile(level, player)
         bullet.shootFromRotation(player, player.xRot, player.yRot, 0.0f, 10.0f, 0.0f)
         level.addFreshEntity(bullet)
-        itemStack.set(ModDataComponents.LOADED, false);
+        itemStack.set(ModDataComponents.LOADED, false)
+        player.cooldowns.addCooldown(itemStack, COOLDOWN_TIME)
     }
 }

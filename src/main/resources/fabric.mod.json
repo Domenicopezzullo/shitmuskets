@@ -23,13 +23,13 @@
 		],
 		"client": [
 			{
-				"value": "com.domenico.shitmuskets.ShitmusketsClient",
+				"value": "com.domenico.client.ShitmusketsClient",
 				"adapter": "kotlin"
 			}
 		],
 		"fabric-datagen": [
 			{
-				"value": "com.domenico.shitmuskets.ShitmusketsDataGenerator",
+				"value": "com.domenico.shitmuskets.datagen.ShitmusketsDataGenerator",
 				"adapter": "kotlin"
 			}
 		]
