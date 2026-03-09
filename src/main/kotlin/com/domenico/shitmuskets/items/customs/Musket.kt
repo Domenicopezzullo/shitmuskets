@@ -1,22 +1,45 @@
 package com.domenico.shitmuskets.items.customs
 
-import com.mojang.serialization.Codec
-import net.minecraft.core.component.DataComponentType
+import com.domenico.shitmuskets.items.ModDataComponents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class Musket(properties: Item.Properties) : Item(properties) {
-    companion object {
-        val LOADED = DataComponentType.builder<Boolean>().persistent(Codec.BOOL).build();
+    companion object{
+        const val COOLDOWN_TIME = 40
     }
 
     override fun use(level: Level, player: Player, interactionHand: InteractionHand): InteractionResult {
+        val item = player.getItemInHand(interactionHand);
+        val loaded = item.getOrDefault(ModDataComponents.LOADED, false)
 
+        if(player.cooldowns.isOnCooldown(item)) {
+            return InteractionResult.FAIL;
+        }
 
-
+        if(loaded) {
+            shoot(level, player, item);
+        } else {
+            reload(level, player, item);
+        }
         return InteractionResult.SUCCESS;
+    }
+
+    private fun reload(level: Level, player: Player, itemStack: ItemStack) {
+        itemStack.set(ModDataComponents.LOADED, true);
+        player.cooldowns.addCooldown(itemStack, COOLDOWN_TIME)
+    }
+
+    private fun shoot(level: Level, player: Player, itemStack: ItemStack) {
+        if(level.isClientSide) return;
+        val lookAngle = player.lookAngle;
+        val bullet = Projectile(level, player)
+        bullet.shootFromRotation(player, player.xRot, player.yRot, 0.0f, 10.0f, 0.0f)
+        level.addFreshEntity(bullet)
+        itemStack.set(ModDataComponents.LOADED, false);
     }
 }

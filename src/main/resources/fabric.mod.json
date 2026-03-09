@@ -21,6 +21,12 @@
 				"adapter": "kotlin"
 			}
 		],
+		"client": [
+			{
+				"value": "com.domenico.shitmuskets.ShitmusketsClient",
+				"adapter": "kotlin"
+			}
+		],
 		"fabric-datagen": [
 			{
 				"value": "com.domenico.shitmuskets.ShitmusketsDataGenerator",
