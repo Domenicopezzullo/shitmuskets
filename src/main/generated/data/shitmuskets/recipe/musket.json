@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": "#minecraft:planks",
+    "Y": "minecraft:flint_and_steel"
+  },
+  "pattern": [
+    "X  ",
+    " XY",
+    "  X"
+  ],
+  "result": {
+    "count": 1,
+    "id": "shitmuskets:musket"
+  }
+}

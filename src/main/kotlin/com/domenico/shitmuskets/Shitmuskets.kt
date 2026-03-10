@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
 
 object Shitmuskets : ModInitializer {
 	const val MOD_ID = "shitmuskets"
-    private val logger = LoggerFactory.getLogger("shitmuskets")
+    private val LOGGER = LoggerFactory.getLogger("shitmuskets")
 
 	override fun onInitialize() {
 		ModEntities.initialize();

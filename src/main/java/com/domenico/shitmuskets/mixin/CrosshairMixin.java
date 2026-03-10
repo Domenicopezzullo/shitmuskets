@@ -25,7 +25,7 @@ public class CrosshairMixin {
         int cx = screenWidth / 2;
         int cy = screenHeight / 2;
 
-        int len = 8;
+        int len = 6;
         int gap = 3;
         int color = 0xFFFFFFFF;
         graphics.fill(cx - len - 1, cy - 1, cx - gap - 1, cy, color);

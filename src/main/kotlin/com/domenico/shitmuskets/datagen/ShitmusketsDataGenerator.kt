@@ -8,5 +8,6 @@ object ShitmusketsDataGenerator : DataGeneratorEntrypoint {
 		val pack = fabricDataGenerator.createPack();
 		pack.addProvider(::ModelProvider);
 		pack.addProvider(::LanguageProvider)
+		pack.addProvider(::CraftingProvider)
 	}
 }
