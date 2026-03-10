@@ -17,5 +17,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     override fun generateItemModels(p0: ItemModelGenerators) {
         p0.generateFlatItem(ModItems.MUSKET, ModelTemplates.FLAT_HANDHELD_ITEM)
+        p0.generateFlatItem(ModItems.CARTRIDGE, ModelTemplates.FLAT_ITEM)
     }
 }

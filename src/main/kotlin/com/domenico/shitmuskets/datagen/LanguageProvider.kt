@@ -13,5 +13,6 @@ class LanguageProvider(output: FabricDataOutput, registryLookup: CompletableFutu
         p1: TranslationBuilder
     ) {
         p1.add(ModItems.MUSKET, "Musket")
+        p1.add(ModItems.CARTRIDGE, "Cartridge")
     }
 }

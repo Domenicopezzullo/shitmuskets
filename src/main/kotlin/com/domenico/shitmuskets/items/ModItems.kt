@@ -20,10 +20,11 @@ object ModItems {
     }
 
     val MUSKET = register("musket", ::Musket, Item.Properties())
-
+    val CARTRIDGE = register("cartridge", ::Item, Item.Properties())
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register { ctx ->
             ctx.accept(MUSKET);
+            ctx.accept(CARTRIDGE)
         }
     }
 }
