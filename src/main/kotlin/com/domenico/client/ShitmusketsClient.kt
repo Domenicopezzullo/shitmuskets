@@ -20,7 +20,7 @@ class ShitmusketsClient : ClientModInitializer {
         EntityRenderers.register(ModEntities.BULLET) { ctx ->
           object: ArrowRenderer<Projectile, ArrowRenderState>(ctx) {
               override fun getTextureLocation(arrowRenderState: ArrowRenderState): Identifier = Identifier.fromNamespaceAndPath(
-                  Shitmuskets.MOD_ID, "entity/cartridge")
+                  Shitmuskets.MOD_ID, "textures/entity/cartridge.png")
               override fun createRenderState(): ArrowRenderState = ArrowRenderState()
           }
         }

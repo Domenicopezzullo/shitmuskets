@@ -34,16 +34,15 @@ class Musket(properties: Item.Properties) : Item(properties) {
     }
 
     private fun reload(level: Level, player: Player, itemStack: ItemStack) {
+        if(level.isClientSide) return;
         if(player.gameMode() == GameType.CREATIVE) {
             itemStack.set(ModDataComponents.LOADED, true);
             return;
         }
-        val inv = player.inventory;
-        if (level.isClientSide) return
+        val bullets = player.inventory.firstOrNull{ it.item == ModItems.CARTRIDGE } ?: return;
         itemStack.set(ModDataComponents.LOADED, true)
         player.cooldowns.addCooldown(itemStack, COOLDOWN_TIME)
-        val itemStack = inv.firstOrNull{ it.item == ModItems.CARTRIDGE } ?: return;
-        itemStack.shrink(1);
+        bullets.shrink(1)
     }
 
     private fun shoot(level: Level, player: Player, itemStack: ItemStack) {
